@@ -1,26 +1,3 @@
-Perfecto — aquí tienes un README.md listo para copiar y entregar 👇
-Solo copia TODO lo siguiente en un archivo llamado README.md.
-
-# 🚀 Práctica: Kubernetes con Minikube (Windows + Docker)
-
-## 🎯 Objetivo
-Desplegar, exponer, escalar y actualizar una aplicación en Kubernetes usando **Minikube con Docker en Windows**, cumpliendo los siguientes pasos:
-
-1. Crear un Deployment con `nginxdemos/hello:latest`
-2. Exponerlo con un Service (ClusterIP → NodePort)
-3. Escalar a 4 réplicas  
-4. Actualizar la imagen a `nginx:alpine`
-
----
-
-# ✅ Requisitos previos
-
-Tener instalado en Windows:
-
-- Docker Desktop  
-- Minikube  
-- kubectl  
-- PowerShell (recomendado)
 
 Verifica con:
 
@@ -79,6 +56,10 @@ Verificar:
 
 kubectl get svc hello-svc
 
+---
+
+index dentro del pod:
+- kubectl exec -it <POD_NAME> -- sh -lc "echo '<h1>NGINX alpine OK</h1>' > /usr/share/nginx/html/index.html"
 
 ---
 
