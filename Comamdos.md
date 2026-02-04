@@ -24,20 +24,20 @@ minikube   Ready    control-plane   ...
 
 1️⃣ Creación del Deployment (1 réplica)
 
-Crear Deployment usando nginxdemos/hello:latest:
+Crear Deployment usando nombre-imagen:latest:
 
-kubectl create deployment hello-nginx \
-  --image=nginxdemos/hello:latest \
+kubectl create deployment nombre-deployment \
+  --image=nombre-imagen:latest \
   --replicas=1
 
 Verificar:
 
-kubectl get deployment hello-nginx
+kubectl get deployment nombre-deployment
 kubectl get pods
 
 Opcional: ver YAML generado
 
-kubectl get deployment hello-nginx -o yaml
+kubectl get deployment nombre-deployment -o yaml
 
 
 ---
@@ -46,7 +46,7 @@ kubectl get deployment hello-nginx -o yaml
 
 2.1 Crear Service tipo ClusterIP
 
-kubectl expose deployment hello-nginx \
+kubectl expose deployment nombre-deployment \
   --name=hello-svc \
   --port=80 \
   --target-port=80 \
@@ -59,7 +59,7 @@ kubectl get svc hello-svc
 ---
 
 index dentro del pod:
-- kubectl exec -it <POD_NAME> -- sh -lc "echo '<h1>NGINX alpine OK</h1>' > /usr/share/nginx/html/index.html"
+- kubectl exec -it <POD_NAME> -- sh -lc "echo '<h1>HOLA - FUNCIONANDO</h1>' > /usr/share/nginx/html/index.html"
 
 ---
 
@@ -100,7 +100,7 @@ curl <URL_GENERADA>
 
 3️⃣ Escalar el Deployment a 4 réplicas
 
-kubectl scale deployment hello-nginx --replicas=4
+kubectl scale deployment nombre-dployment --replicas=4
 
 Verificar:
 
@@ -111,16 +111,16 @@ Debe haber 4 pods en Running.
 
 ---
 
-4️⃣ Actualizar el Deployment a nginx:alpine
+4️⃣ Actualizar el Deployment a nuevo:actualizacion
 
 Cambiar imagen:
 
-kubectl set image deployment/hello-nginx \
-  hello-nginx=nginx:alpine
+kubectl set image deployment/nombre deployment \
+  nombre-deployment=nuevo:actualizacion
 
 Ver estado del rollout:
 
-kubectl rollout status deployment/hello-nginx
+kubectl rollout status deployment/nombre-deployment
 kubectl get pods
 
 
@@ -152,16 +152,26 @@ curl -i <URL>
 
 🧠 Comandos útiles para depuración
 
-kubectl describe deployment hello-nginx
+kubectl describe deployment nombre-deployment
 kubectl describe svc hello-svc
-kubectl logs -l app=hello-nginx --tail=50
+kubectl logs -l app=nombre-deployment --tail=50
 kubectl get events --sort-by=.metadata.creationTimestamp
 
 
 ---
 
-🧹 Limpieza (opcional)
+🧹 Limpieza 
 
 kubectl delete svc hello-svc
-kubectl delete deployment hello-nginx
+kubectl delete deployment nombre-deployment
 minikube delete
+
+
+---
+
+Dashboard
+minikube addons enable dashboard
+minikube addons enable metrics-server
+
+minikube dashboard
+
